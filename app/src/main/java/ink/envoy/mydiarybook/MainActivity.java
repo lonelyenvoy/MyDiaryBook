@@ -1,6 +1,7 @@
 package ink.envoy.mydiarybook;
 
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,7 +11,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,6 +30,7 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -214,8 +218,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 1) {
-            loadData();
-            refreshDiaryViews();
+            // 等待DiaryDetailActivity的onStop()方法执行完毕，将数据保存后再刷新
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    loadData();
+                    refreshDiaryViews();
+                }
+            }, 500);
         }
     }
 }
@@ -252,6 +262,10 @@ class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder>
     {
         // 给ViewHolder设置元素
         Diary diary = diaries.get(i);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String date = dateFormat.format(diary.updatedAt);
+        viewHolder.mMonthTextView.setText(date.substring(5, 7));
+        viewHolder.mDayTextView.setText(date.substring(8, 10));
         viewHolder.mTitleTextView.setText(diary.title);
         viewHolder.mContentTextView.setText(diary.content);
     }
@@ -289,14 +303,18 @@ class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder>
 
 class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
+    public TextView mMonthTextView;
+    public TextView mDayTextView;
     public TextView mTitleTextView;
     public TextView mContentTextView;
     private MyItemClickListener mListener;
 
     public MyViewHolder(View rootView,MyItemClickListener listener) {
         super(rootView);
-        mTitleTextView = (TextView)rootView.findViewById(R.id.title);
-        mContentTextView = (TextView)rootView.findViewById(R.id.content);
+        mTitleTextView = (TextView) rootView.findViewById(R.id.title);
+        mContentTextView = (TextView) rootView.findViewById(R.id.content);
+        mMonthTextView = (TextView) rootView.findViewById(R.id.monthTextView);
+        mDayTextView = (TextView) rootView.findViewById(R.id.dayTextView);
         this.mListener = listener;
         rootView.setOnClickListener(this);
         rootView.setOnLongClickListener(this);

@@ -17,12 +17,11 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
         );
         long time = System.currentTimeMillis();
         sqLiteDatabase.execSQL(
-                "INSERT INTO diary(title, content, createdAt, updatedAt) values ('欢迎使用日记本', '用最简单的方式，抓住一闪而过的灵感，写下至关重要的句子，保存此时此刻的心情', ?, ?)",
-                new Object[] { time, time });
-        //
+                "INSERT INTO diary(title, content, createdAt, updatedAt) values ('欢迎使用日记本', '用最简单的方式，抓住一闪而过的灵感，写下至关重要的句子，保存此时此刻的心情。', ?, ?)",
+                new Object[] { time-70L*1000*60*60*24, time-70L*1000*60*60*24 });
         sqLiteDatabase.execSQL(
                 "INSERT INTO diary(title, content, createdAt, updatedAt) values ('Test', 'The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog ', ?, ?)",
-                new Object[] { time, time });
+                new Object[] { time-25L*1000*60*60*24, time-25L*1000*60*60*24 });
         sqLiteDatabase.execSQL(
                 "INSERT INTO diary(title, content, createdAt, updatedAt) values ('这是标题1', '这是内容1', ?, ?)",
                 new Object[] { time, time });

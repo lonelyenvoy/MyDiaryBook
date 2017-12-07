@@ -35,6 +35,7 @@ public class DiaryDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_detail);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initialize();
     }
@@ -49,8 +50,6 @@ public class DiaryDetailActivity extends AppCompatActivity {
     private void initialize() {
         bindViews();
 
-
-
         Intent intent = getIntent();
         currentDiaryId = intent.getIntExtra("diaryId", -1);
         if (currentDiaryId != -1) {
@@ -60,15 +59,6 @@ public class DiaryDetailActivity extends AppCompatActivity {
             showEmptyData();
         }
         setResult(1, new Intent());
-
-        executorService = Executors.newScheduledThreadPool(1);
-        executorService.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                String a = "1+1";
-                String b = a + "1";
-            }
-        },0, 10, TimeUnit.MILLISECONDS);
 
         executorService = Executors.newScheduledThreadPool(1);
         executorService.scheduleAtFixedRate(new Runnable() {
