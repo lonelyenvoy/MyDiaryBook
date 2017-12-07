@@ -237,14 +237,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 1) {
-            // 等待DiaryDetailActivity的onStop()方法执行完毕，将数据保存后再刷新
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    loadData();
-                    refreshDiaryViews();
-                }
-            }, 500);
+            loadData();
+            refreshDiaryViews();
         }
     }
 }
