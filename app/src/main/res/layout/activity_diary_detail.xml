@@ -30,6 +30,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
         android:hint="标题"
+        android:textColor="#4b4b4b"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeTextView"
@@ -55,15 +56,10 @@
         android:paddingEnd="5dp"
         android:paddingRight="5dp"
         android:hint="内容"
+        android:textColor="#4b4b4b"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleEditText" />
-
-    <ListView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
 
 </android.support.constraint.ConstraintLayout>

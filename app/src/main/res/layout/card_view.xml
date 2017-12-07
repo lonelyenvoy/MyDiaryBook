@@ -72,7 +72,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
                 android:clickable="false"
-                android:textColor="@android:color/black"
+                android:textColor="#4b4b4b"
                 android:textSize="20sp" />
 
             <TextView
@@ -84,7 +84,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
                 android:clickable="false"
-                android:textColor="@android:color/black"
+                android:textColor="#4b4b4b"
                 android:textSize="14sp" />
 
         </LinearLayout>
