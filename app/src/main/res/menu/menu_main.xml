@@ -6,10 +6,12 @@
         android:id="@+id/action_new"
         android:orderInCategory="100"
         android:title="新日记"
+        android:icon="@drawable/ic_new_diary"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_delete_all"
-        android:orderInCategory="100"
+        android:orderInCategory="101"
         android:title="清空日记本"
+        android:icon="@drawable/ic_clear"
         app:showAsAction="never" />
 </menu>
